@@ -21,8 +21,10 @@ onMounted(async () => {
 </script>
 
 <template>
-  <main>hello world</main>
-  <ul v-for="park in skateparks">
-    <li>{{ park.title }}</li>
-  </ul>
+  <main>
+    <h1 class="title">Welcome to sk8prks.com!</h1>
+    <ul v-for="park in skateparks">
+      <li>{{ park.title }}</li>
+    </ul>
+  </main>
 </template>
