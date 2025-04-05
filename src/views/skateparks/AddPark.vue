@@ -7,14 +7,19 @@ const title = ref('')
 const slug = ref('')
 const street = ref('')
 const city = ref('')
+const state = ref('')
 
 const addPark = async () => {
+  const stateAbrv = state.value.substring(0, 2)
+  const collectionName = state.value.slice(3)
+
   // add to db
-  const docRef = await addDoc(collection(db, 'colorado'), {
+  const docRef = await addDoc(collection(db, collectionName), {
     title: title.value,
     slug: slug.value,
     street: street.value,
     city: city.value,
+    state: stateAbrv,
   })
 
   // confirm write
@@ -65,10 +70,10 @@ const addPark = async () => {
         <label class="label">State</label>
         <div class="control">
           <div class="select">
-            <select>
-              <option>CA - California</option>
-              <option>CO - Colorado</option>
-              <option>TX - Texas</option>
+            <select v-model="state">
+              <option value="CA:california">California</option>
+              <option value="CO:colorado">Colorado</option>
+              <option value="TX:texas">Texas</option>
             </select>
           </div>
         </div>
