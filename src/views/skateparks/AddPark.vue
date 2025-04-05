@@ -9,13 +9,22 @@ const street = ref('')
 const city = ref('')
 
 const addPark = async () => {
-  await addDoc(collection(db, 'colorado'), {
+  // add to db
+  const docRef = await addDoc(collection(db, 'colorado'), {
     title: title.value,
     slug: slug.value,
     street: street.value,
     city: city.value,
   })
-  console.log('Document written with ID: ', addPark.id)
+
+  // confirm write
+  console.log('Document written with ID: ', docRef.id)
+
+  // reset form
+  title.value = ''
+  slug.value = ''
+  street.value = ''
+  city.value = ''
 }
 </script>
 
