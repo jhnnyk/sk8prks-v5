@@ -11,15 +11,16 @@ const state = ref('')
 
 const addPark = async () => {
   const stateAbrv = state.value.substring(0, 2)
-  const collectionName = state.value.slice(3)
+  const stateSlug = state.value.slice(3)
 
   // add to db
-  const docRef = await addDoc(collection(db, collectionName), {
+  const docRef = await addDoc(collection(db, 'skateparks'), {
     title: title.value,
     slug: slug.value,
     street: street.value,
     city: city.value,
     state: stateAbrv,
+    stateSlug: stateSlug,
   })
 
   // confirm write
