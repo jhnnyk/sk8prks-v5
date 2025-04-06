@@ -6,7 +6,7 @@ const showMobileNav = ref(false)
 <template>
   <nav class="navbar" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
-      <a href="/" class="navbar-item"> sk8prks.com </a>
+      <RouterLink :to="{ name: 'home' }" class="navbar-item">sk8prks.com</RouterLink>
 
       <a
         role="button"
