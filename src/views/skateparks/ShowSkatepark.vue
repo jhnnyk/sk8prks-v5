@@ -41,6 +41,9 @@ watch(
       >
     </p>
     <p>{{ currentSkatepark.description }}</p>
+    <div v-for="img in currentSkatepark.images">
+      <img :src="`${img.path}`" :alt="img.alt_text" />
+    </div>
   </section>
   {{ currentSkatepark }}
 </template>
