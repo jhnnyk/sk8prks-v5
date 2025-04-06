@@ -8,6 +8,7 @@ const skateparkStore = useSkateparkStore()
 
 onMounted(() => {
   skateparkStore.fetchParks()
+  console.log('fetching all skateparks')
 })
 </script>
 
