@@ -1,30 +1,17 @@
 <script setup>
-import { collection, getDocs } from 'firebase/firestore'
-import { db } from '@/firebase'
-import { ref, onMounted } from 'vue'
+import { useSkateparkStore } from '@/stores/SkateparkStore'
 
-const skateparks = ref([])
-
-onMounted(async () => {
-  const querySnapshot = await getDocs(collection(db, 'skateparks'))
-  let dbSkateparks = []
-  querySnapshot.forEach((doc) => {
-    const park = {
-      id: doc.id,
-      title: doc.data().title,
-      description: doc.data().description,
-    }
-    dbSkateparks.push(park)
-  })
-  skateparks.value = dbSkateparks
-})
+const skateparkStore = useSkateparkStore()
 </script>
 
 <template>
   <main>
     <h1 class="title">Welcome to sk8prks.com!</h1>
-    <ul v-for="park in skateparks">
-      <li>{{ park.title }}</li>
+
+    <ul>
+      <li v-for="park in skateparkStore.getParks" :key="park.id">
+        {{ park.title }}
+      </li>
     </ul>
   </main>
 </template>

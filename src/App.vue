@@ -1,6 +1,14 @@
 <script setup>
+import { onMounted } from 'vue'
 import { RouterView } from 'vue-router'
+import { useSkateparkStore } from './stores/SkateparkStore'
 import NavBar from './components/NavBar.vue'
+
+const skateparkStore = useSkateparkStore()
+
+onMounted(() => {
+  skateparkStore.fetchParks()
+})
 </script>
 
 <template>
