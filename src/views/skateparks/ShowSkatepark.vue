@@ -25,6 +25,22 @@ watch(
 <template>
   <section class="section">
     <h1 class="title">{{ currentSkatepark.title }}</h1>
+    <p>
+      {{ currentSkatepark.street }}<br />
+      {{ currentSkatepark.city }}, {{ currentSkatepark.state }} {{ currentSkatepark.zip }}<br />
+      <a
+        target="_blank"
+        :href="`https://www.google.com/maps/search/?api=1&query=${currentSkatepark.latitude}%2C${currentSkatepark.longitude}`"
+        >Google Maps</a
+      >
+      |
+      <a
+        target="_blank"
+        :href="`http://maps.apple.com/?ll=${currentSkatepark.latitude},${currentSkatepark.longitude}&q=${currentSkatepark.title}`"
+        >Apple Maps</a
+      >
+    </p>
+    <p>{{ currentSkatepark.description }}</p>
   </section>
   {{ currentSkatepark }}
 </template>
