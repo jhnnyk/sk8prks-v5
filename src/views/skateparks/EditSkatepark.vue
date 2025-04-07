@@ -1,13 +1,13 @@
 <script setup>
 import { useSkateparkStore } from '@/stores/SkateparkStore'
-import { onMounted, ref, watch } from 'vue'
+import { computed, onMounted, ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
 
 // const title = ref('')
-const slug = ref('')
-const street = ref('')
-const city = ref('')
-const state = ref('')
+// const slug = ref('')
+// const street = ref('')
+// const city = ref('')
+// const state = ref('')
 
 const skateparkStore = useSkateparkStore()
 const route = useRoute()
@@ -20,6 +20,10 @@ const getCurrentSkatepark = () => {
   )
   currentSkatepark.value = { ...foundPark }
 }
+
+const stateSelect = computed(() => {
+  return currentSkatepark.value.state + ':' + currentSkatepark.value.stateSlug
+})
 
 onMounted(() => getCurrentSkatepark())
 watch(
@@ -48,21 +52,36 @@ watch(
       <div class="field">
         <label class="label">slug</label>
         <div class="control">
-          <input v-model="slug" class="input" type="text" placeholder="e.g roxborough" />
+          <input
+            v-model="currentSkatepark.slug"
+            class="input"
+            type="text"
+            placeholder="e.g roxborough"
+          />
         </div>
       </div>
 
       <div class="field">
         <label class="label">Street</label>
         <div class="control">
-          <input v-model="street" class="input" type="text" placeholder="e.g. 123 Main St." />
+          <input
+            v-model="currentSkatepark.street"
+            class="input"
+            type="text"
+            placeholder="e.g. 123 Main St."
+          />
         </div>
       </div>
 
       <div class="field">
         <label class="label">City</label>
         <div class="control">
-          <input v-model="city" class="input" type="text" placeholder="e.g. Littleton" />
+          <input
+            v-model="currentSkatepark.city"
+            class="input"
+            type="text"
+            placeholder="e.g. Littleton"
+          />
         </div>
       </div>
 
@@ -70,7 +89,7 @@ watch(
         <label class="label">State</label>
         <div class="control">
           <div class="select">
-            <select v-model="state">
+            <select v-model="stateSelect">
               <option value="CA:california">California</option>
               <option value="CO:colorado">Colorado</option>
               <option value="TX:texas">Texas</option>
@@ -82,32 +101,51 @@ watch(
       <div class="field">
         <label class="label">Zip Code</label>
         <div class="control">
-          <input class="input" type="text" placeholder="e.g. 12345" />
+          <input
+            v-model="currentSkatepark.zip"
+            class="input"
+            type="text"
+            placeholder="e.g. 12345"
+          />
         </div>
       </div>
 
       <div class="field">
         <label class="label">Latitude</label>
         <div class="control">
-          <input class="input" type="text" placeholder="e.g. 39.8967" />
+          <input
+            v-model="currentSkatepark.latitude"
+            class="input"
+            type="text"
+            placeholder="e.g. 39.8967"
+          />
         </div>
       </div>
 
       <div class="field">
         <label class="label">Longitude</label>
         <div class="control">
-          <input class="input" type="text" placeholder="e.g. -104.9358" />
+          <input
+            v-model="currentSkatepark.longitude"
+            class="input"
+            type="text"
+            placeholder="e.g. -104.9358"
+          />
         </div>
       </div>
 
       <div class="field">
         <label class="label">Description</label>
         <div class="control">
-          <textarea class="textarea" placeholder="e.g. This skatepark is great!"></textarea>
+          <textarea
+            v-model="currentSkatepark.description"
+            class="textarea"
+            placeholder="e.g. This skatepark is great!"
+          ></textarea>
         </div>
       </div>
 
-      <label class="label">Tags:</label>
+      <label class="label">Tags: {{ currentSkatepark.tags }}</label>
       <div class="field has-addons">
         <div class="control">
           <input class="input" type="text" placeholder="e.g. lights" />
@@ -117,7 +155,7 @@ watch(
         </div>
       </div>
 
-      <label class="label">Images:</label>
+      <label class="label">Images: {{ currentSkatepark.images }}</label>
       <div class="field">
         <div class="control">
           <input
