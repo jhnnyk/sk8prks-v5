@@ -2,12 +2,8 @@
 import { useSkateparkStore } from '@/stores/SkateparkStore'
 import { computed, onMounted, ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
-
-// const title = ref('')
-// const slug = ref('')
-// const street = ref('')
-// const city = ref('')
-// const state = ref('')
+import { doc, setDoc } from 'firebase/firestore'
+import { db } from '@/firebase'
 
 const skateparkStore = useSkateparkStore()
 const route = useRoute()
@@ -30,12 +26,26 @@ watch(
   () => skateparkStore.getParks,
   () => getCurrentSkatepark(),
 )
+
+const updatePark = async () => {
+  const stateAbrv = stateSelect.value.substring(0, 2)
+  const stateSlug = stateSelect.value.slice(3)
+
+  await setDoc(doc(db, 'skateparks', currentSkatepark.value.id), {
+    title: currentSkatepark.value.title,
+    slug: currentSkatepark.value.slug,
+    street: currentSkatepark.value.street,
+    city: currentSkatepark.value.city,
+    state: stateAbrv,
+    stateSlug: stateSlug,
+  })
+}
 </script>
 
 <template>
   <section class="section">
-    <form @submit.prevent="addPark">
-      <h1 class="title">Add a skatepark</h1>
+    <form @submit.prevent="updatePark">
+      <h1 class="title">Edit skatepark</h1>
 
       <div class="field">
         <label class="label">Title</label>
