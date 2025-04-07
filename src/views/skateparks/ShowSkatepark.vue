@@ -25,6 +25,11 @@ watch(
 <template>
   <section class="section">
     <h1 class="title">{{ currentSkatepark.title }}</h1>
+    <button class="button is-info">
+      <RouterLink :to="`/skateparks/${currentSkatepark.stateSlug}/${currentSkatepark.slug}/edit`">
+        Edit
+      </RouterLink>
+    </button>
     <p>
       {{ currentSkatepark.street }}<br />
       {{ currentSkatepark.city }}, {{ currentSkatepark.state }} {{ currentSkatepark.zip }}<br />
