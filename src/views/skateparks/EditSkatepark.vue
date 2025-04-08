@@ -1,6 +1,6 @@
 <script setup>
 import { useSkateparkStore } from '@/stores/SkateparkStore'
-import { computed, onMounted, ref, watch } from 'vue'
+import { onMounted, ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import { doc, setDoc } from 'firebase/firestore'
 import { db } from '@/firebase'
@@ -12,14 +12,10 @@ const currentSkatepark = ref({})
 
 const getCurrentSkatepark = () => {
   const foundPark = skateparkStore.getParks.find(
-    (park) => park.stateSlug === route.params.stateSlug && park.slug === route.params.slug,
+    (park) => park.state.slice(3) === route.params.stateSlug && park.slug === route.params.slug,
   )
   currentSkatepark.value = { ...foundPark }
 }
-
-const stateSelect = computed(() => {
-  return currentSkatepark.value.state + ':' + currentSkatepark.value.stateSlug
-})
 
 onMounted(() => getCurrentSkatepark())
 watch(
@@ -28,16 +24,8 @@ watch(
 )
 
 const updatePark = async () => {
-  const stateAbrv = stateSelect.value.substring(0, 2)
-  const stateSlug = stateSelect.value.slice(3)
-
   await setDoc(doc(db, 'skateparks', currentSkatepark.value.id), {
-    title: currentSkatepark.value.title,
-    slug: currentSkatepark.value.slug,
-    street: currentSkatepark.value.street,
-    city: currentSkatepark.value.city,
-    state: stateAbrv,
-    stateSlug: stateSlug,
+    ...currentSkatepark.value,
   })
 }
 </script>
@@ -99,7 +87,7 @@ const updatePark = async () => {
         <label class="label">State</label>
         <div class="control">
           <div class="select">
-            <select v-model="stateSelect">
+            <select v-model="currentSkatepark.state">
               <option value="CA:california">California</option>
               <option value="CO:colorado">Colorado</option>
               <option value="TX:texas">Texas</option>
