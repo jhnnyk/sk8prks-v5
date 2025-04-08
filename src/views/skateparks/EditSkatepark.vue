@@ -25,7 +25,17 @@ watch(
 
 const updatePark = async () => {
   await setDoc(doc(db, 'skateparks', currentSkatepark.value.id), {
-    ...currentSkatepark.value,
+    title: currentSkatepark.value.title,
+    slug: currentSkatepark.value.slug,
+    street: currentSkatepark.value.street,
+    city: currentSkatepark.value.city,
+    state: currentSkatepark.value.state,
+    zip: currentSkatepark.value.zip,
+    latitude: currentSkatepark.value.latitude,
+    longitude: currentSkatepark.value.longitude,
+    description: currentSkatepark.value.description,
+    tags: currentSkatepark.value.tags,
+    images: currentSkatepark.value.images,
   })
 }
 </script>

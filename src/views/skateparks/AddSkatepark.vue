@@ -8,11 +8,14 @@ const slug = ref('')
 const street = ref('')
 const city = ref('')
 const state = ref('')
+const zip = ref('')
+const latitude = ref('')
+const longitude = ref('')
+const description = ref('')
+const tags = ref([])
+const images = ref([])
 
 const addPark = async () => {
-  // const stateAbrv = state.value.substring(0, 2)
-  // const stateSlug = state.value.slice(3)
-
   // add to db
   const docRef = await addDoc(collection(db, 'skateparks'), {
     title: title.value,
@@ -20,6 +23,12 @@ const addPark = async () => {
     street: street.value,
     city: city.value,
     state: state.value,
+    zip: zip.value,
+    latitude: latitude.value,
+    longitude: longitude.value,
+    description: description.value,
+    tags: tags.value,
+    images: images.value,
   })
 
   // confirm write
@@ -30,6 +39,13 @@ const addPark = async () => {
   slug.value = ''
   street.value = ''
   city.value = ''
+  state.value = ''
+  zip.value = ''
+  latitude.value = ''
+  longitude.value = ''
+  description.value = ''
+  tags.value = []
+  images.value = []
 }
 </script>
 
@@ -82,28 +98,32 @@ const addPark = async () => {
       <div class="field">
         <label class="label">Zip Code</label>
         <div class="control">
-          <input class="input" type="text" placeholder="e.g. 12345" />
+          <input v-model="zip" class="input" type="text" placeholder="e.g. 12345" />
         </div>
       </div>
 
       <div class="field">
         <label class="label">Latitude</label>
         <div class="control">
-          <input class="input" type="text" placeholder="e.g. 39.8967" />
+          <input v-model="latitude" class="input" type="text" placeholder="e.g. 39.8967" />
         </div>
       </div>
 
       <div class="field">
         <label class="label">Longitude</label>
         <div class="control">
-          <input class="input" type="text" placeholder="e.g. -104.9358" />
+          <input v-model="longitude" class="input" type="text" placeholder="e.g. -104.9358" />
         </div>
       </div>
 
       <div class="field">
         <label class="label">Description</label>
         <div class="control">
-          <textarea class="textarea" placeholder="e.g. This skatepark is great!"></textarea>
+          <textarea
+            v-model="description"
+            class="textarea"
+            placeholder="e.g. This skatepark is great!"
+          ></textarea>
         </div>
       </div>
 
