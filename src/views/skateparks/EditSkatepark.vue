@@ -170,13 +170,16 @@ const resetTagInput = () => {
       </div>
 
       <label class="label">Tags</label>
-      <div v-for="tag in currentSkatepark.tags" class="buttons">
-        <div class="button is-danger is-rounded">
-          {{ tag }}
-          &nbsp; | &nbsp;
-          <span @click="removeTag(tag)">x</span>
+      <div class="buttons">
+        <div v-for="tag in currentSkatepark.tags">
+          <div class="button is-danger is-rounded">
+            {{ tag }}
+            &nbsp; | &nbsp;
+            <span @click="removeTag(tag)">x</span>
+          </div>
         </div>
       </div>
+
       <div class="field has-addons">
         <div class="control">
           <input v-model="newTag" class="input" type="text" placeholder="e.g. lights" />
