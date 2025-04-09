@@ -8,6 +8,8 @@ import { db } from '@/firebase'
 const skateparkStore = useSkateparkStore()
 const route = useRoute()
 
+const newImgPath = ref('')
+const newImgText = ref('')
 const newTag = ref('')
 const currentSkatepark = ref({})
 
@@ -53,6 +55,21 @@ const addTag = (newTag) => {
 
 const resetTagInput = () => {
   newTag.value = ''
+}
+
+const addImage = () => {
+  if (newImgPath !== '' && newImgText !== '') {
+    currentSkatepark.value.images.push({
+      path: newImgPath.value,
+      alt_text: newImgText.value,
+    })
+  }
+  resetImgInput()
+}
+
+const resetImgInput = () => {
+  newImgPath.value = ''
+  newImgText.value = ''
 }
 </script>
 
@@ -207,6 +224,7 @@ const resetTagInput = () => {
       <div class="field">
         <div class="control">
           <input
+            v-model="newImgPath"
             class="input"
             type="text"
             placeholder="Path: e.g. /images/colorado/slocum/img_2345.jpg"
@@ -214,13 +232,14 @@ const resetTagInput = () => {
         </div>
         <div class="control">
           <input
+            v-model="newImgText"
             class="input"
             type="text"
             placeholder="Alt Text: e.g. Slocum Skatepark street area"
           />
         </div>
         <div class="control">
-          <button class="button is-link">Add image reference</button>
+          <div @click="addImage" class="button is-link">Add image</div>
         </div>
       </div>
 
