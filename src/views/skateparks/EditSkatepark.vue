@@ -8,6 +8,7 @@ import { db } from '@/firebase'
 const skateparkStore = useSkateparkStore()
 const route = useRoute()
 
+const newTag = ref('')
 const currentSkatepark = ref({})
 
 const getCurrentSkatepark = () => {
@@ -37,6 +38,21 @@ const updatePark = async () => {
     tags: currentSkatepark.value.tags,
     images: currentSkatepark.value.images,
   })
+}
+
+const removeTag = (tag) => {
+  console.log(tag)
+}
+
+const addTag = (newTag) => {
+  if (newTag !== '') {
+    currentSkatepark.value.tags.push(newTag)
+  }
+  resetTagInput()
+}
+
+const resetTagInput = () => {
+  newTag.value = ''
 }
 </script>
 
@@ -154,12 +170,19 @@ const updatePark = async () => {
       </div>
 
       <label class="label">Tags: {{ currentSkatepark.tags }}</label>
+      <div v-for="tag in currentSkatepark.tags" class="buttons">
+        <button class="button is-danger is-rounded">
+          {{ tag }}
+          &nbsp; | &nbsp;
+          <span @click="removeTag(tag)">x</span>
+        </button>
+      </div>
       <div class="field has-addons">
         <div class="control">
-          <input class="input" type="text" placeholder="e.g. lights" />
+          <input v-model="newTag" class="input" type="text" placeholder="e.g. lights" />
         </div>
         <div class="control">
-          <button class="button is-link">Add tag</button>
+          <div @click="addTag(newTag)" class="button is-link">Add tag</div>
         </div>
       </div>
 
