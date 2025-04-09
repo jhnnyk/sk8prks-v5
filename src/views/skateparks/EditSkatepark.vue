@@ -40,8 +40,8 @@ const updatePark = async () => {
   })
 }
 
-const removeTag = (tag) => {
-  console.log(tag)
+const removeTag = (tagToDelete) => {
+  currentSkatepark.value.tags = currentSkatepark.value.tags.filter((tag) => tag !== tagToDelete)
 }
 
 const addTag = (newTag) => {
@@ -169,13 +169,13 @@ const resetTagInput = () => {
         </div>
       </div>
 
-      <label class="label">Tags: {{ currentSkatepark.tags }}</label>
+      <label class="label">Tags</label>
       <div v-for="tag in currentSkatepark.tags" class="buttons">
-        <button class="button is-danger is-rounded">
+        <div class="button is-danger is-rounded">
           {{ tag }}
           &nbsp; | &nbsp;
           <span @click="removeTag(tag)">x</span>
-        </button>
+        </div>
       </div>
       <div class="field has-addons">
         <div class="control">
