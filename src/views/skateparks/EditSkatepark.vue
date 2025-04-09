@@ -42,10 +42,6 @@ const updatePark = async () => {
   })
 }
 
-const removeTag = (tagToDelete) => {
-  currentSkatepark.value.tags = currentSkatepark.value.tags.filter((tag) => tag !== tagToDelete)
-}
-
 const addTag = (newTag) => {
   if (newTag !== '') {
     currentSkatepark.value.tags.push(newTag)
@@ -55,6 +51,10 @@ const addTag = (newTag) => {
 
 const resetTagInput = () => {
   newTag.value = ''
+}
+
+const removeTag = (tagToDelete) => {
+  currentSkatepark.value.tags = currentSkatepark.value.tags.filter((tag) => tag !== tagToDelete)
 }
 
 const addImage = () => {
@@ -70,6 +70,13 @@ const addImage = () => {
 const resetImgInput = () => {
   newImgPath.value = ''
   newImgText.value = ''
+}
+
+const deleteImg = (imgToDelete) => {
+  const index = currentSkatepark.value.images.findIndex((img) => img.path === imgToDelete.path)
+  if (index > -1) {
+    currentSkatepark.value.images.splice(index, 1)
+  }
 }
 </script>
 
@@ -217,7 +224,7 @@ const resetImgInput = () => {
           </figure>
         </div>
         <div class="column">
-          <div class="button is-danger is-outlined is-small">Delete</div>
+          <div @click="deleteImg(img)" class="button is-danger is-outlined is-small">Delete</div>
         </div>
       </div>
 
