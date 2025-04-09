@@ -169,7 +169,7 @@ const resetTagInput = () => {
         </div>
       </div>
 
-      <label class="label">Tags</label>
+      <label class="label">Tags:</label>
       <div class="buttons">
         <div v-for="tag in currentSkatepark.tags">
           <div class="button is-danger is-rounded">
@@ -190,6 +190,20 @@ const resetTagInput = () => {
       </div>
 
       <label class="label">Images: {{ currentSkatepark.images }}</label>
+      <div v-for="img in currentSkatepark.images" class="columns is-mobile is-vcentered">
+        <div class="column is-half">
+          {{ img.alt_text }}
+        </div>
+        <div class="column">
+          <figure class="image is-128x128 is-square">
+            <img :src="img.path" :alt="img.alt_text" />
+          </figure>
+        </div>
+        <div class="column">
+          <div class="button is-danger is-outlined is-small">Delete</div>
+        </div>
+      </div>
+
       <div class="field">
         <div class="control">
           <input
