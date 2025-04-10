@@ -1,6 +1,6 @@
 <script setup>
 import { useSkateparkStore } from '@/stores/SkateparkStore'
-import { computed, onMounted, ref, watch } from 'vue'
+import { onMounted, ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
 
 const skateparkStore = useSkateparkStore()
