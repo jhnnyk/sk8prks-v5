@@ -5,7 +5,9 @@ const skateparkStore = useSkateparkStore()
 </script>
 
 <template>
-  <section v-if="skateparkStore.loading" class="section">loading...</section>
+  <section v-if="skateparkStore.loading" class="section">
+    <p class="has-text-centered">loading...</p>
+  </section>
   <section v-if="!skateparkStore.loading" class="section">
     <h1 class="title">{{ skateparkStore.getCurrentPark.title }}</h1>
     <button class="button is-info">
