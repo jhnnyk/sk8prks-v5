@@ -1,44 +1,33 @@
 <script setup>
 import { useSkateparkStore } from '@/stores/SkateparkStore'
-import { onMounted, ref, watch } from 'vue'
-import { useRoute } from 'vue-router'
+import { onUpdated, ref } from 'vue'
 import { doc, setDoc } from 'firebase/firestore'
 import { db } from '@/firebase'
 
 const skateparkStore = useSkateparkStore()
-const route = useRoute()
 
 const newImgPath = ref('')
 const newImgText = ref('')
 const newTag = ref('')
 const currentSkatepark = ref({})
 
-const getCurrentSkatepark = () => {
-  const foundPark = skateparkStore.getParks.find(
-    (park) => park.state.slice(3) === route.params.stateSlug && park.slug === route.params.slug,
-  )
-  currentSkatepark.value = { ...foundPark }
-}
-
-onMounted(() => getCurrentSkatepark())
-watch(
-  () => skateparkStore.getParks,
-  () => getCurrentSkatepark(),
-)
+onUpdated(() => {
+  skateparkStore.getCurrentPark
+})
 
 const updatePark = async () => {
-  await setDoc(doc(db, 'skateparks', currentSkatepark.value.id), {
-    title: currentSkatepark.value.title,
-    slug: currentSkatepark.value.slug,
-    street: currentSkatepark.value.street,
-    city: currentSkatepark.value.city,
-    state: currentSkatepark.value.state,
-    zip: currentSkatepark.value.zip,
-    latitude: currentSkatepark.value.latitude,
-    longitude: currentSkatepark.value.longitude,
-    description: currentSkatepark.value.description,
-    tags: currentSkatepark.value.tags,
-    images: currentSkatepark.value.images,
+  await setDoc(doc(db, 'skateparks', skateparkStore.getCurrentPark.id), {
+    title: skateparkStore.getCurrentPark.title,
+    slug: skateparkStore.getCurrentPark.slug,
+    street: skateparkStore.getCurrentPark.street,
+    city: skateparkStore.getCurrentPark.city,
+    state: skateparkStore.getCurrentPark.state,
+    zip: skateparkStore.getCurrentPark.zip,
+    latitude: skateparkStore.getCurrentPark.latitude,
+    longitude: skateparkStore.getCurrentPark.longitude,
+    description: skateparkStore.getCurrentPark.description,
+    tags: skateparkStore.getCurrentPark.tags,
+    images: skateparkStore.getCurrentPark.images,
   })
 }
 
@@ -81,7 +70,10 @@ const deleteImg = (imgToDelete) => {
 </script>
 
 <template>
-  <section class="section">
+  <section v-if="skateparkStore.loading" class="section">
+    <p class="has-text-centered">loading...</p>
+  </section>
+  <section v-else class="section">
     <form @submit.prevent="updatePark">
       <h1 class="title">Edit skatepark</h1>
 
@@ -89,7 +81,7 @@ const deleteImg = (imgToDelete) => {
         <label class="label">Title</label>
         <div class="control">
           <input
-            v-model="currentSkatepark.title"
+            v-model="skateparkStore.getCurrentPark.title"
             class="input"
             type="text"
             placeholder="e.g Roxborough"
@@ -101,7 +93,7 @@ const deleteImg = (imgToDelete) => {
         <label class="label">slug</label>
         <div class="control">
           <input
-            v-model="currentSkatepark.slug"
+            v-model="skateparkStore.getCurrentPark.slug"
             class="input"
             type="text"
             placeholder="e.g roxborough"
@@ -113,7 +105,7 @@ const deleteImg = (imgToDelete) => {
         <label class="label">Street</label>
         <div class="control">
           <input
-            v-model="currentSkatepark.street"
+            v-model="skateparkStore.getCurrentPark.street"
             class="input"
             type="text"
             placeholder="e.g. 123 Main St."
@@ -125,7 +117,7 @@ const deleteImg = (imgToDelete) => {
         <label class="label">City</label>
         <div class="control">
           <input
-            v-model="currentSkatepark.city"
+            v-model="skateparkStore.getCurrentPark.city"
             class="input"
             type="text"
             placeholder="e.g. Littleton"
@@ -137,7 +129,7 @@ const deleteImg = (imgToDelete) => {
         <label class="label">State</label>
         <div class="control">
           <div class="select">
-            <select v-model="currentSkatepark.state">
+            <select v-model="skateparkStore.getCurrentPark.state">
               <option value="CA:california">California</option>
               <option value="CO:colorado">Colorado</option>
               <option value="TX:texas">Texas</option>
@@ -150,7 +142,7 @@ const deleteImg = (imgToDelete) => {
         <label class="label">Zip Code</label>
         <div class="control">
           <input
-            v-model="currentSkatepark.zip"
+            v-model="skateparkStore.getCurrentPark.zip"
             class="input"
             type="text"
             placeholder="e.g. 12345"
@@ -162,7 +154,7 @@ const deleteImg = (imgToDelete) => {
         <label class="label">Latitude</label>
         <div class="control">
           <input
-            v-model="currentSkatepark.latitude"
+            v-model="skateparkStore.getCurrentPark.latitude"
             class="input"
             type="text"
             placeholder="e.g. 39.8967"
@@ -174,7 +166,7 @@ const deleteImg = (imgToDelete) => {
         <label class="label">Longitude</label>
         <div class="control">
           <input
-            v-model="currentSkatepark.longitude"
+            v-model="skateparkStore.getCurrentPark.longitude"
             class="input"
             type="text"
             placeholder="e.g. -104.9358"
@@ -186,7 +178,7 @@ const deleteImg = (imgToDelete) => {
         <label class="label">Description</label>
         <div class="control">
           <textarea
-            v-model="currentSkatepark.description"
+            v-model="skateparkStore.getCurrentPark.description"
             class="textarea"
             placeholder="e.g. This skatepark is great!"
           ></textarea>
@@ -195,7 +187,7 @@ const deleteImg = (imgToDelete) => {
 
       <label class="label">Tags:</label>
       <div class="buttons">
-        <div v-for="tag in currentSkatepark.tags">
+        <div v-for="tag in skateparkStore.getCurrentPark.tags">
           <div class="button is-danger is-rounded">
             {{ tag }}
             &nbsp; | &nbsp;
@@ -213,8 +205,11 @@ const deleteImg = (imgToDelete) => {
         </div>
       </div>
 
-      <label class="label">Images: {{ currentSkatepark.images }}</label>
-      <div v-for="img in currentSkatepark.images" class="columns is-mobile is-vcentered">
+      <label class="label">Images: {{ skateparkStore.getCurrentPark.images }}</label>
+      <div
+        v-for="img in skateparkStore.getCurrentPark.images"
+        class="columns is-mobile is-vcentered"
+      >
         <div class="column is-half">
           {{ img.alt_text }}
         </div>
