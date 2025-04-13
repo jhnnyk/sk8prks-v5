@@ -32,19 +32,11 @@ const deleteImg = (imgToDelete) => {
 }
 
 const moveImgUp = (index) => {
-  if (index === 0) {
-    console.log('image is already at the top')
-  } else {
-    console.log('trying...', index)
-  }
+  console.log('trying...', index)
 }
 
 const moveImgDown = (index) => {
-  if (index >= skateparkStore.getCurrentPark.images.length - 1) {
-    console.log('image is already at the bottom')
-  } else {
-    console.log('trying...', index)
-  }
+  console.log('trying...', index)
 }
 </script>
 
@@ -64,12 +56,26 @@ const moveImgDown = (index) => {
       </figure>
     </div>
     <div class="column has-text-centered level">
-      <div @click="moveImgUp(index)" class="button is-small is-rounded">
+      <button
+        type="button"
+        @click="moveImgUp(index)"
+        class="button is-small is-rounded"
+        :disabled="index === 0"
+      >
         {{ index }}
         &#8679;
-      </div>
-      <div @click="deleteImg(img)" class="button is-danger is-outlined is-small">Delete</div>
-      <div @click="moveImgDown(index)" class="button is-small is-rounded">{{ index }} &#8681;</div>
+      </button>
+      <button type="button" @click="deleteImg(img)" class="button is-danger is-outlined is-small">
+        Delete
+      </button>
+      <button
+        type="button"
+        @click="moveImgDown(index)"
+        class="button is-small is-rounded"
+        :disabled="index === skateparkStore.getCurrentPark.images.length - 1"
+      >
+        {{ index }} &#8681;
+      </button>
     </div>
   </div>
 
@@ -91,7 +97,7 @@ const moveImgDown = (index) => {
       />
     </div>
     <div class="control">
-      <div @click="addImage" class="button is-link">Add image</div>
+      <button type="button" @click="addImage" class="button is-link">Add image</button>
     </div>
   </div>
 </template>

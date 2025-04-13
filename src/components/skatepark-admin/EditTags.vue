@@ -40,7 +40,7 @@ const removeTag = (tagToDelete) => {
       <input v-model="newTag" class="input" type="text" placeholder="e.g. lights" />
     </div>
     <div class="control">
-      <div @click="addTag(newTag)" class="button is-link">Add tag</div>
+      <button type="button" @click="addTag(newTag)" class="button is-link">Add tag</button>
     </div>
   </div>
 </template>
