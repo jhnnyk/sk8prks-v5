@@ -57,6 +57,23 @@ const addPark = async () => {
     console.log('make sure you have a title and slug')
   }
 }
+
+const newTag = ref('')
+
+const addTag = (newTag) => {
+  if (newTag !== '') {
+    tags.value.push(newTag)
+  }
+  resetTagInput()
+}
+
+const resetTagInput = () => {
+  newTag.value = ''
+}
+
+const removeTag = (tagToDelete) => {
+  tags.value = tags.value.filter((tag) => tag !== tagToDelete)
+}
 </script>
 
 <template>
@@ -138,12 +155,22 @@ const addPark = async () => {
       </div>
 
       <label class="label">Tags:</label>
+      <div class="buttons">
+        <div v-for="tag in tags">
+          <div class="button is-danger is-rounded">
+            {{ tag }}
+            &nbsp; | &nbsp;
+            <span @click="removeTag(tag)">x</span>
+          </div>
+        </div>
+      </div>
+
       <div class="field has-addons">
         <div class="control">
-          <input class="input" type="text" placeholder="e.g. lights" />
+          <input v-model="newTag" class="input" type="text" placeholder="e.g. lights" />
         </div>
         <div class="control">
-          <button class="button is-link">Add tag</button>
+          <div @click="addTag(newTag)" class="button is-link">Add tag</div>
         </div>
       </div>
 
