@@ -6,6 +6,10 @@ import { db } from '@/firebase'
 
 const router = useRouter()
 
+const newTag = ref('')
+const newImgPath = ref('')
+const newImgText = ref('')
+
 const title = ref('')
 const slug = ref('')
 const street = ref('')
@@ -18,6 +22,7 @@ const description = ref('')
 const tags = ref([])
 const images = ref([])
 
+// save new skatepark
 const addPark = async () => {
   if (title.value !== '' && slug.value !== '' && state.value !== '') {
     // add to db
@@ -58,8 +63,7 @@ const addPark = async () => {
   }
 }
 
-const newTag = ref('')
-
+// handle tags
 const addTag = (newTag) => {
   if (newTag !== '') {
     tags.value.push(newTag)
@@ -73,6 +77,29 @@ const resetTagInput = () => {
 
 const removeTag = (tagToDelete) => {
   tags.value = tags.value.filter((tag) => tag !== tagToDelete)
+}
+
+// handle images
+const addImage = () => {
+  if (newImgPath !== '' && newImgText !== '') {
+    images.value.push({
+      path: newImgPath.value,
+      alt_text: newImgText.value,
+    })
+  }
+  resetImgInput()
+}
+
+const resetImgInput = () => {
+  newImgPath.value = ''
+  newImgText.value = ''
+}
+
+const deleteImg = (imgToDelete) => {
+  const index = images.value.findIndex((img) => img.path === imgToDelete.path)
+  if (index > -1) {
+    images.value.splice(index, 1)
+  }
 }
 </script>
 
@@ -174,10 +201,25 @@ const removeTag = (tagToDelete) => {
         </div>
       </div>
 
-      <label class="label">Images:</label>
+      <label class="label">Images: {{ images }}</label>
+      <div v-for="img in images" class="columns is-mobile is-vcentered">
+        <div class="column is-half">
+          {{ img.alt_text }}
+        </div>
+        <div class="column">
+          <figure class="image is-128x128 is-square">
+            <img :src="img.path" :alt="img.alt_text" />
+          </figure>
+        </div>
+        <div class="column">
+          <div @click="deleteImg(img)" class="button is-danger is-outlined is-small">Delete</div>
+        </div>
+      </div>
+
       <div class="field">
         <div class="control">
           <input
+            v-model="newImgPath"
             class="input"
             type="text"
             placeholder="Path: e.g. /images/colorado/slocum/img_2345.jpg"
@@ -185,13 +227,14 @@ const removeTag = (tagToDelete) => {
         </div>
         <div class="control">
           <input
+            v-model="newImgText"
             class="input"
             type="text"
             placeholder="Alt Text: e.g. Slocum Skatepark street area"
           />
         </div>
         <div class="control">
-          <button class="button is-link">Add image reference</button>
+          <div @click="addImage" class="button is-link">Add image</div>
         </div>
       </div>
 
