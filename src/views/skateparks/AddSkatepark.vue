@@ -19,7 +19,7 @@ const tags = ref([])
 const images = ref([])
 
 const addPark = async () => {
-  if (title.value !== '' && slug.value !== '') {
+  if (title.value !== '' && slug.value !== '' && state.value !== '') {
     // add to db
     const docRef = await addDoc(collection(db, 'skateparks'), {
       title: title.value,
@@ -84,14 +84,14 @@ const removeTag = (tagToDelete) => {
       <div class="field">
         <label class="label">Title</label>
         <div class="control">
-          <input v-model="title" class="input" type="text" placeholder="e.g Roxborough" />
+          <input v-model="title" class="input" type="text" placeholder="e.g Roxborough" required />
         </div>
       </div>
 
       <div class="field">
         <label class="label">slug</label>
         <div class="control">
-          <input v-model="slug" class="input" type="text" placeholder="e.g roxborough" />
+          <input v-model="slug" class="input" type="text" placeholder="e.g roxborough" required />
         </div>
       </div>
 
@@ -113,7 +113,7 @@ const removeTag = (tagToDelete) => {
         <label class="label">State</label>
         <div class="control">
           <div class="select">
-            <select v-model="state">
+            <select v-model="state" required>
               <option value="CA:california">California</option>
               <option value="CO:colorado">Colorado</option>
               <option value="TX:texas">Texas</option>
