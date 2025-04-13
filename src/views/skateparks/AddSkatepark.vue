@@ -19,39 +19,43 @@ const tags = ref([])
 const images = ref([])
 
 const addPark = async () => {
-  // add to db
-  const docRef = await addDoc(collection(db, 'skateparks'), {
-    title: title.value,
-    slug: slug.value,
-    street: street.value,
-    city: city.value,
-    state: state.value,
-    zip: zip.value,
-    latitude: latitude.value,
-    longitude: longitude.value,
-    description: description.value,
-    tags: tags.value,
-    images: images.value,
-  })
+  if (title.value !== '' && slug.value !== '') {
+    // add to db
+    const docRef = await addDoc(collection(db, 'skateparks'), {
+      title: title.value,
+      slug: slug.value,
+      street: street.value,
+      city: city.value,
+      state: state.value,
+      zip: zip.value,
+      latitude: latitude.value,
+      longitude: longitude.value,
+      description: description.value,
+      tags: tags.value,
+      images: images.value,
+    })
 
-  // confirm write
-  console.log('Document written with ID: ', docRef.id)
+    // confirm write
+    console.log('Skatepark added with ID: ', docRef.id)
 
-  // reset form
-  title.value = ''
-  slug.value = ''
-  street.value = ''
-  city.value = ''
-  state.value = ''
-  zip.value = ''
-  latitude.value = ''
-  longitude.value = ''
-  description.value = ''
-  tags.value = []
-  images.value = []
+    // reset form
+    title.value = ''
+    slug.value = ''
+    street.value = ''
+    city.value = ''
+    state.value = ''
+    zip.value = ''
+    latitude.value = ''
+    longitude.value = ''
+    description.value = ''
+    tags.value = []
+    images.value = []
 
-  // redirect to home screen
-  router.push({ name: 'home' })
+    // redirect to home screen
+    router.push({ name: 'home' })
+  } else {
+    console.log('make sure you have a title and slug')
+  }
 }
 </script>
 
