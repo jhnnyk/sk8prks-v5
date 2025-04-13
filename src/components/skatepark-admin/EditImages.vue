@@ -30,11 +30,31 @@ const deleteImg = (imgToDelete) => {
     skateparkStore.getCurrentPark.images.splice(index, 1)
   }
 }
+
+const moveImgUp = (index) => {
+  if (index === 0) {
+    console.log('image is already at the top')
+  } else {
+    console.log('trying...', index)
+  }
+}
+
+const moveImgDown = (index) => {
+  if (index >= skateparkStore.getCurrentPark.images.length - 1) {
+    console.log('image is already at the bottom')
+  } else {
+    console.log('trying...', index)
+  }
+}
 </script>
 
 <template>
   <label class="label">Images: {{ skateparkStore.getCurrentPark.images }}</label>
-  <div v-for="img in skateparkStore.getCurrentPark.images" class="columns is-mobile is-vcentered">
+  <div
+    v-for="(img, index) in skateparkStore.getCurrentPark.images"
+    :key="index"
+    class="columns is-mobile is-vcentered"
+  >
     <div class="column is-half">
       {{ img.alt_text }}
     </div>
@@ -44,9 +64,12 @@ const deleteImg = (imgToDelete) => {
       </figure>
     </div>
     <div class="column has-text-centered level">
-      <div class="button is-small is-rounded">&#8679;</div>
+      <div @click="moveImgUp(index)" class="button is-small is-rounded">
+        {{ index }}
+        &#8679;
+      </div>
       <div @click="deleteImg(img)" class="button is-danger is-outlined is-small">Delete</div>
-      <div class="button is-small is-rounded">&#8681;</div>
+      <div @click="moveImgDown(index)" class="button is-small is-rounded">{{ index }} &#8681;</div>
     </div>
   </div>
 
