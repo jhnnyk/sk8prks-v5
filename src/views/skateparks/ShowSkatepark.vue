@@ -39,5 +39,4 @@ const skateparkStore = useSkateparkStore()
       <img :src="img.path" :alt="img.alt_text" />
     </div>
   </section>
-  {{ skateparkStore.getCurrentPark }}
 </template>

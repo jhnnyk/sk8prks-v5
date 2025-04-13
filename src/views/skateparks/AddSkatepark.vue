@@ -201,10 +201,11 @@ const deleteImg = (imgToDelete) => {
         </div>
       </div>
 
-      <label class="label">Images: {{ images }}</label>
+      <label class="label">Images:</label>
       <div v-for="img in images" class="columns is-mobile is-vcentered">
         <div class="column is-half">
-          {{ img.alt_text }}
+          {{ img.alt_text }}<br />
+          <span class="is-size-7 is-italic">{{ img.path }}</span>
         </div>
         <div class="column">
           <figure class="image is-128x128 is-square">
