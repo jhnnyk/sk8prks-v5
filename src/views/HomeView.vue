@@ -16,4 +16,7 @@ const skateparkStore = useSkateparkStore()
       </li>
     </ul>
   </section>
+  <section class="section has-text-centered">
+    <RouterLink :to="{ name: 'add skatepark' }" class="button is-primary">Add Skatepark</RouterLink>
+  </section>
 </template>
