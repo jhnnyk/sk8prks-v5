@@ -32,7 +32,9 @@ const deleteImg = (imgToDelete) => {
 }
 
 const moveImgUp = (index) => {
-  console.log('trying...', index)
+  const img = skateparkStore.getCurrentPark.images[index]
+  skateparkStore.getCurrentPark.images.splice(index, 1)
+  skateparkStore.getCurrentPark.images.splice(index - 1, 0, img)
 }
 
 const moveImgDown = (index) => {
