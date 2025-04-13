@@ -1,12 +1,14 @@
 <script setup>
 import { useSkateparkStore } from '@/stores/SkateparkStore'
 import { onUpdated } from 'vue'
+import { useRouter } from 'vue-router'
 import { doc, setDoc } from 'firebase/firestore'
 import { db } from '@/firebase'
 import EditTags from '@/components/skatepark-admin/EditTags.vue'
 import EditImages from '@/components/skatepark-admin/EditImages.vue'
 
 const skateparkStore = useSkateparkStore()
+const router = useRouter()
 
 onUpdated(() => {
   skateparkStore.getCurrentPark
@@ -25,6 +27,13 @@ const updatePark = async () => {
     description: skateparkStore.getCurrentPark.description,
     tags: skateparkStore.getCurrentPark.tags,
     images: skateparkStore.getCurrentPark.images,
+  })
+  router.push({
+    name: 'show skatepark',
+    params: {
+      stateSlug: skateparkStore.getCurrentPark.state.slice(3),
+      slug: skateparkStore.getCurrentPark.slug,
+    },
   })
 }
 </script>
