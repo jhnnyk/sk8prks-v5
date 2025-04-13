@@ -1,7 +1,10 @@
 <script setup>
 import { ref } from 'vue'
+import { useRouter } from 'vue-router'
 import { collection, addDoc } from 'firebase/firestore'
 import { db } from '@/firebase'
+
+const router = useRouter()
 
 const title = ref('')
 const slug = ref('')
@@ -46,6 +49,9 @@ const addPark = async () => {
   description.value = ''
   tags.value = []
   images.value = []
+
+  // redirect to home screen
+  router.push({ name: 'home' })
 }
 </script>
 
