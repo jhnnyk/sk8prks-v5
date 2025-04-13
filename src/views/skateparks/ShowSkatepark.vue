@@ -10,13 +10,13 @@ const skateparkStore = useSkateparkStore()
   </section>
   <section v-if="!skateparkStore.loading" class="section">
     <h1 class="title">{{ skateparkStore.getCurrentPark.title }}</h1>
-    <button class="button is-info">
-      <RouterLink
-        :to="`/skateparks/${skateparkStore.getCurrentPark.state.slice(3)}/${skateparkStore.getCurrentPark.slug}/edit`"
-      >
-        Edit
-      </RouterLink>
-    </button>
+
+    <RouterLink
+      :to="`/skateparks/${skateparkStore.getCurrentPark.state.slice(3)}/${skateparkStore.getCurrentPark.slug}/edit`"
+    >
+      <button class="button is-info">Edit</button>
+    </RouterLink>
+
     <p>
       {{ skateparkStore.getCurrentPark.street }}<br />
       {{ skateparkStore.getCurrentPark.city }},
