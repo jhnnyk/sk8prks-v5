@@ -43,8 +43,10 @@ const deleteImg = (imgToDelete) => {
         <img :src="img.path" :alt="img.alt_text" />
       </figure>
     </div>
-    <div class="column">
+    <div class="column has-text-centered level">
+      <div class="button is-small is-rounded">&#8679;</div>
       <div @click="deleteImg(img)" class="button is-danger is-outlined is-small">Delete</div>
+      <div class="button is-small is-rounded">&#8681;</div>
     </div>
   </div>
 

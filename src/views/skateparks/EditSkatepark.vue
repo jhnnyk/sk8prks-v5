@@ -15,6 +15,7 @@ onUpdated(() => {
 })
 
 const updatePark = async () => {
+  // save to DB
   await setDoc(doc(db, 'skateparks', skateparkStore.getCurrentPark.id), {
     title: skateparkStore.getCurrentPark.title,
     slug: skateparkStore.getCurrentPark.slug,
@@ -28,6 +29,7 @@ const updatePark = async () => {
     tags: skateparkStore.getCurrentPark.tags,
     images: skateparkStore.getCurrentPark.images,
   })
+  // redirect back to skatepark page after save
   router.push({
     name: 'show skatepark',
     params: {
