@@ -45,7 +45,7 @@ const moveImgDown = (index) => {
 </script>
 
 <template>
-  <label class="label">Images: {{ skateparkStore.getCurrentPark.images }}</label>
+  <label class="label">Images:</label>
   <div
     v-for="(img, index) in skateparkStore.getCurrentPark.images"
     :key="index"
@@ -67,7 +67,6 @@ const moveImgDown = (index) => {
         class="button is-small is-rounded"
         :disabled="index === 0"
       >
-        {{ index }}
         &#8679;
       </button>
       <button type="button" @click="deleteImg(img)" class="button is-danger is-outlined is-small">
@@ -79,7 +78,7 @@ const moveImgDown = (index) => {
         class="button is-small is-rounded"
         :disabled="index === skateparkStore.getCurrentPark.images.length - 1"
       >
-        {{ index }} &#8681;
+        &#8681;
       </button>
     </div>
   </div>
