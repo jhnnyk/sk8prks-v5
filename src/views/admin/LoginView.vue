@@ -1,17 +1,22 @@
 <script setup>
 import { ref } from 'vue'
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
+import { useUserStore } from '@/stores/UserStore'
 
 const auth = getAuth()
+const userStore = useUserStore()
 
 const email = ref('')
 const password = ref('')
 
 const login = () => {
-  signInWithEmailAndPassword(auth, email, password)
+  signInWithEmailAndPassword(auth, email.value, password.value)
     .then((userCredential) => {
       // Signed in
       const user = userCredential.user
+      console.log(user)
+
+      userStore.setUser(user)
       // ...
     })
     .catch((error) => {
