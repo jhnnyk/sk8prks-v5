@@ -3,6 +3,7 @@ import HomeView from '../views/HomeView.vue'
 import AddSkatepark from '@/views/skateparks/AddSkatepark.vue'
 import ShowSkatepark from '@/views/skateparks/ShowSkatepark.vue'
 import EditSkatepark from '@/views/skateparks/EditSkatepark.vue'
+import LoginView from '@/views/admin/LoginView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -34,6 +35,11 @@ const router = createRouter({
       path: '/skateparks/:stateSlug/:slug/edit',
       name: 'edit skatepark',
       component: EditSkatepark,
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: LoginView,
     },
   ],
 })
