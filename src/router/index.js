@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import { useUserStore } from '@/stores/UserStore'
 import HomeView from '../views/HomeView.vue'
 import AddSkatepark from '@/views/skateparks/AddSkatepark.vue'
 import ShowSkatepark from '@/views/skateparks/ShowSkatepark.vue'
@@ -25,6 +26,13 @@ const router = createRouter({
       path: '/skateparks/add',
       name: 'add skatepark',
       component: AddSkatepark,
+      beforeEnter: (to, from) => {
+        const userStore = useUserStore()
+        if (!userStore.user) {
+          return { name: 'login' }
+        }
+        return true
+      },
     },
     {
       path: '/skateparks/:stateSlug/:slug',
@@ -35,6 +43,13 @@ const router = createRouter({
       path: '/skateparks/:stateSlug/:slug/edit',
       name: 'edit skatepark',
       component: EditSkatepark,
+      beforeEnter: (to, from) => {
+        const userStore = useUserStore()
+        if (!userStore.user) {
+          return { name: 'login' }
+        }
+        return true
+      },
     },
     {
       path: '/login',
