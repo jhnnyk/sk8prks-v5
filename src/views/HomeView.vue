@@ -1,7 +1,9 @@
 <script setup>
 import { useSkateparkStore } from '@/stores/SkateparkStore'
+import { useUserStore } from '@/stores/UserStore'
 
 const skateparkStore = useSkateparkStore()
+const userStore = useUserStore()
 </script>
 
 <template>
@@ -16,7 +18,7 @@ const skateparkStore = useSkateparkStore()
       </li>
     </ul>
   </section>
-  <section class="section has-text-centered">
+  <section v-if="userStore.user" class="section has-text-centered">
     <RouterLink :to="{ name: 'add skatepark' }" class="button is-primary">Add Skatepark</RouterLink>
   </section>
 </template>

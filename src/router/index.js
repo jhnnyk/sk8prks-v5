@@ -1,9 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import { useUserStore } from '@/stores/UserStore'
 import HomeView from '../views/HomeView.vue'
-import AddSkatepark from '@/views/skateparks/AddSkatepark.vue'
 import ShowSkatepark from '@/views/skateparks/ShowSkatepark.vue'
-import EditSkatepark from '@/views/skateparks/EditSkatepark.vue'
 import LoginView from '@/views/admin/LoginView.vue'
 
 const router = createRouter({

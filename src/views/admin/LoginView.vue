@@ -57,7 +57,7 @@ const logout = () => {
   </section>
 
   <section class="section" v-else>
-    <h2 class="is-size-2 has-text-centered">Already logged in as:</h2>
+    <h2 class="is-size-2 has-text-centered">Logged in as:</h2>
     <p class="has-text-centered">{{ userStore.user.email }}</p>
     <p class="has-text-centered my-5">
       <button @click="logout" class="button is-link">Log out</button>

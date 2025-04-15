@@ -1,7 +1,9 @@
 <script setup>
 import { useSkateparkStore } from '@/stores/SkateparkStore'
+import { useUserStore } from '@/stores/UserStore'
 
 const skateparkStore = useSkateparkStore()
+const userStore = useUserStore()
 </script>
 
 <template>
@@ -9,13 +11,16 @@ const skateparkStore = useSkateparkStore()
     <p class="has-text-centered">loading...</p>
   </section>
   <section v-if="!skateparkStore.loading" class="section">
-    <h1 class="title">{{ skateparkStore.getCurrentPark.title }}</h1>
+    <h1 class="title">
+      {{ skateparkStore.getCurrentPark.title }}
 
-    <RouterLink
-      :to="`/skateparks/${skateparkStore.getCurrentPark.state.slice(3)}/${skateparkStore.getCurrentPark.slug}/edit`"
-    >
-      <button class="button is-info">Edit</button>
-    </RouterLink>
+      <RouterLink
+        v-if="userStore.user"
+        :to="`/skateparks/${skateparkStore.getCurrentPark.state.slice(3)}/${skateparkStore.getCurrentPark.slug}/edit`"
+      >
+        <button class="button is-info">Edit</button>
+      </RouterLink>
+    </h1>
 
     <p>
       {{ skateparkStore.getCurrentPark.street }}<br />
