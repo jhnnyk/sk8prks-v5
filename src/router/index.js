@@ -20,12 +20,12 @@ const router = createRouter({
       // route level code-splitting
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
-      component: () => import('../views/AboutView.vue'),
+      component: () => import('@/views/AboutView.vue'),
     },
     {
       path: '/skateparks/add',
       name: 'add skatepark',
-      component: AddSkatepark,
+      component: () => import('@/views/skateparks/AddSkatepark.vue'),
       beforeEnter: (to, from) => {
         const userStore = useUserStore()
         if (!userStore.user) {
@@ -42,7 +42,7 @@ const router = createRouter({
     {
       path: '/skateparks/:stateSlug/:slug/edit',
       name: 'edit skatepark',
-      component: EditSkatepark,
+      component: () => import('@/views/skateparks/EditSkatepark.vue'),
       beforeEnter: (to, from) => {
         const userStore = useUserStore()
         if (!userStore.user) {
