@@ -1,5 +1,8 @@
 <template>
-  <div class="about">
-    <h1>This is an about page</h1>
-  </div>
+  <section class="section">
+    <p>
+      This project originated from a personal goal to see how many skateparks I could visit in a
+      year.
+    </p>
+  </section>
 </template>
