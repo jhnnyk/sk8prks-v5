@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
 import { useRoute } from 'vue-router'
 import { db } from '@/firebase'
-import { collection, getDocs } from 'firebase/firestore'
+import { collection, getDocs, orderBy, query } from 'firebase/firestore'
 
 export const useSkateparkStore = defineStore('SkateparkStore', {
   state: () => ({
@@ -13,9 +13,11 @@ export const useSkateparkStore = defineStore('SkateparkStore', {
   actions: {
     async fetchParks() {
       this.loading = true
+      const skateparkCollection = collection(db, 'skateparks')
 
       try {
-        const querySnapshot = await getDocs(collection(db, 'skateparks'))
+        const q = query(skateparkCollection, orderBy('title'))
+        const querySnapshot = await getDocs(q)
         this.parks = querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }))
         this.loading = false
       } catch (error) {
