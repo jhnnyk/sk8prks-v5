@@ -10,9 +10,10 @@ const userStore = useUserStore()
   <section class="section">
     <h1 class="title">Welcome to sk8prks.com!</h1>
 
-    <ul>
-      <li v-for="park in skateparkStore.getParks" :key="park.id">
+    <ul class="grid">
+      <li v-for="park in skateparkStore.getParks" :key="park.id" class="cell has-text-centered">
         <RouterLink :to="`/skateparks/${park.state.slice(3)}/${park.slug}`">
+          <img :src="park.images[1].path" :alt="park.images[1].alt_text" />
           {{ park.title }}
         </RouterLink>
       </li>
