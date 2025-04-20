@@ -3,6 +3,7 @@ import { useUserStore } from '@/stores/UserStore'
 import HomeView from '../views/HomeView.vue'
 import ShowSkatepark from '@/views/skateparks/ShowSkatepark.vue'
 import LoginView from '@/views/admin/LoginView.vue'
+import MapView from '@/views/MapView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -53,6 +54,11 @@ const router = createRouter({
       path: '/login',
       name: 'login',
       component: LoginView,
+    },
+    {
+      path: '/map',
+      name: 'map',
+      component: MapView,
     },
   ],
 })
