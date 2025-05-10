@@ -1,8 +1,8 @@
 <template>
   <section class="section">
     <p>
-      This project originated from a personal goal to see how many skateparks I could visit in a
-      year.
+      A little project to get me out of my comfort zone and see how many different skateparks I can
+      visit.
     </p>
   </section>
 </template>
