@@ -11,6 +11,12 @@ const userStore = useUserStore()
     <h1 class="title mb-0">Welcome to sk8prks.com</h1>
     <p class="mb-5">{{ skateparkStore.getParks.length }} skateparks and counting!</p>
 
+    <ul>
+      <li v-for="city in skateparkStore.getParksByCity" :key="city.name">
+        {{ city.name }} ({{ city.count }})
+      </li>
+    </ul>
+
     <ul class="grid is-col-min-10">
       <li v-for="park in skateparkStore.getParks" :key="park.id" class="cell has-text-centered">
         <RouterLink :to="`/skateparks/${park.state.slice(3)}/${park.slug}`">
