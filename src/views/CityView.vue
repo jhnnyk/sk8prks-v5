@@ -8,7 +8,7 @@ const skateparkStore = useSkateparkStore()
   <section class="section">
     <h1 class="title">Skateparks by City</h1>
     <ul class="grid is-col-min-10">
-      <li v-for="city in skateparkStore.getParksByCity" :key="city.name">
+      <li v-for="city in skateparkStore.getParkCountByCity" :key="city.name">
         {{ city.name }} ({{ city.count }})
       </li>
     </ul>

@@ -38,7 +38,7 @@ export const useSkateparkStore = defineStore('SkateparkStore', {
       )
     },
 
-    getParksByCity: (state) => {
+    getParkCountByCity: (state) => {
       const cityCounts = []
 
       state.parks.forEach((park) => {
