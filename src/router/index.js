@@ -50,14 +50,19 @@ const router = createRouter({
       },
     },
     {
-      path: '/login',
-      name: 'login',
-      component: () => import('@/views/admin/LoginView.vue'),
-    },
-    {
       path: '/map',
       name: 'map',
       component: MapView,
+    },
+    {
+      path: '/cities',
+      name: 'cities',
+      component: () => import('@/views/CityView.vue'),
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: () => import('@/views/admin/LoginView.vue'),
     },
   ],
 })
