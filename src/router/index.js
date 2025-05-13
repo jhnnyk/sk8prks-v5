@@ -57,6 +57,11 @@ const router = createRouter({
     {
       path: '/cities',
       name: 'cities',
+      component: () => import('@/views/CitiesView.vue'),
+    },
+    {
+      path: '/city/:stateSlug/:citySlug',
+      name: 'city skateparks',
       component: () => import('@/views/CityView.vue'),
     },
     {
