@@ -9,7 +9,7 @@ const skateparkStore = useSkateparkStore()
     <p class="has-text-centered">loading...</p>
   </section>
   <section v-if="!skateparkStore.loading" class="section">
-    <h1 class="title">City</h1>
+    <h1 class="title">{{ skateparkStore.getCityParks[0].city }} Skateparks</h1>
     <ul class="grid is-col-min-10">
       <li v-for="park in skateparkStore.getCityParks" :key="park.id" class="cell has-text-centered">
         <RouterLink :to="`/skateparks/${park.state.slice(3)}/${park.slug}`">
