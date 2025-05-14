@@ -19,6 +19,7 @@ const router = createRouter({
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
       component: () => import('@/views/AboutView.vue'),
+      meta: { title: 'about | sk8prks.com' },
     },
     {
       path: '/skateparks/add',
@@ -31,11 +32,13 @@ const router = createRouter({
         }
         return true
       },
+      meta: { title: 'add skatepark | sk8prks.com' },
     },
     {
       path: '/skateparks/:stateSlug/:slug',
       name: 'show skatepark',
       component: ShowSkatepark,
+      meta: { title: (route) => `${route.params.slug.replace(/-/g, ' ')} skatepark | sk8prks.com` },
     },
     {
       path: '/skateparks/:stateSlug/:slug/edit',
@@ -48,28 +51,42 @@ const router = createRouter({
         }
         return true
       },
+      meta: {
+        title: (route) => `edit ${route.params.slug.replace(/-/g, ' ')} skatepark | sk8prks.com`,
+      },
     },
     {
       path: '/map',
       name: 'map',
       component: () => import('@/views/MapView.vue'),
+      meta: { title: 'skatepark map | sk8prks.com' },
     },
     {
       path: '/cities',
       name: 'cities',
       component: () => import('@/views/CitiesView.vue'),
+      meta: { title: 'skateparks by city | sk8prks.com' },
     },
     {
       path: '/city/:stateSlug/:citySlug',
       name: 'city skateparks',
       component: () => import('@/views/CityView.vue'),
+      meta: {
+        title: (route) => `${route.params.citySlug.replace(/-/g, ' ')} skateparks | sk8prks.com`,
+      },
     },
     {
       path: '/login',
       name: 'login',
       component: () => import('@/views/admin/LoginView.vue'),
+      meta: { title: 'login | sk8prks.com' },
     },
   ],
+})
+
+router.afterEach((to) => {
+  document.title =
+    typeof to.meta.title === 'function' ? to.meta.title(to) : to.meta.title || 'sk8prks.com'
 })
 
 export default router
