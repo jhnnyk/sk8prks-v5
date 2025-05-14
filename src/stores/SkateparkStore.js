@@ -60,7 +60,6 @@ export const useSkateparkStore = defineStore('SkateparkStore', {
 
     getCityParks: (state) => {
       const route = useRoute()
-      console.log(route.params)
 
       return state.parks.filter(
         (park) => park.city.toLowerCase().replace(/\s/g, '') === route.params.citySlug,
