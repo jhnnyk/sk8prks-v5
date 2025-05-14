@@ -52,7 +52,7 @@ const router = createRouter({
     {
       path: '/map',
       name: 'map',
-      component: MapView,
+      component: () => import('@/views/MapView.vue'),
     },
     {
       path: '/cities',
