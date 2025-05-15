@@ -65,5 +65,14 @@ export const useSkateparkStore = defineStore('SkateparkStore', {
         (park) => park.city.toLowerCase().replace(/\s/g, '-') === route.params.citySlug,
       )
     },
+
+    getRecentlyUpdatedParks: (state) => {
+      const sorted = state.parks.sort((a, b) => {
+        if (a.lastUpdated < b.lastUpdated) return 1
+        if (a.lastUpdated > b.lastUpdated) return -1
+      })
+
+      return sorted.slice(0, 10)
+    },
   },
 })
