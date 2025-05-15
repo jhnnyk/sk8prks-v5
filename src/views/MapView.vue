@@ -1,5 +1,6 @@
 <template>
   <section class="section">
+    <h1 class="is-size-1 has-text-centered">Skatepark Map</h1>
     <div class="iframe-rwd my-2">
       <iframe
         src="https://www.google.com/maps/d/u/0/embed?mid=1Ab_Dey4BRrhQSOPefnRJXD-lxHQcONg&ehbc=2E312F&noprof=1"

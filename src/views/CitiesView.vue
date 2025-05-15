@@ -15,7 +15,7 @@ const texasCities = computed(() => {
 
 <template>
   <section class="section">
-    <h1 class="title has-text-centered">Skateparks by City</h1>
+    <h1 class="is-size-1 has-text-centered">Skateparks by City</h1>
     <h2 class="is-size-3 is-uppercase">Colorado</h2>
     <ul class="grid is-col-min-10">
       <li v-for="city in coloradoCities" :key="city.name">
