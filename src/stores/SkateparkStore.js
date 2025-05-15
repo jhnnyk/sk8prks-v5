@@ -67,7 +67,7 @@ export const useSkateparkStore = defineStore('SkateparkStore', {
     },
 
     getRecentlyUpdatedParks: (state) => {
-      const sorted = state.parks.sort((a, b) => {
+      const sorted = state.parks.slice().sort((a, b) => {
         if (a.lastUpdated < b.lastUpdated) return 1
         if (a.lastUpdated > b.lastUpdated) return -1
       })

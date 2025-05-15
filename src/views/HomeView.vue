@@ -42,8 +42,10 @@ const months = [
   </section>
 
   <section class="section">
-    <p><RouterLink to="/skateparks/all">all skateparks</RouterLink></p>
-    <p><RouterLink to="/skateparks/tagged/lights">skateparks with lights</RouterLink></p>
-    <p><RouterLink to="/skateparks/tagged/prefab">prefab skateparks</RouterLink></p>
+    <p class="is-size-3 is-uppercase">
+      <RouterLink to="/skateparks/all">all skateparks</RouterLink> |
+      <RouterLink to="/skateparks/tagged/lights">skateparks with lights</RouterLink> |
+      <RouterLink to="/skateparks/tagged/prefab">prefab skateparks</RouterLink>
+    </p>
   </section>
 </template>
