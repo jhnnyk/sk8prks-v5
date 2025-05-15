@@ -46,7 +46,7 @@ export const useSkateparkStore = defineStore('SkateparkStore', {
           var index = cityCounts.findIndex((item) => item.name === park.city)
           cityCounts[index].count++
         } else {
-          cityCounts.push({ name: park.city, count: 1 })
+          cityCounts.push({ name: park.city, state: park.state.substring(0, 2), count: 1 })
         }
       })
 
