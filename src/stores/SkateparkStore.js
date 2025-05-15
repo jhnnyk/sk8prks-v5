@@ -74,5 +74,11 @@ export const useSkateparkStore = defineStore('SkateparkStore', {
 
       return sorted.slice(0, 10)
     },
+
+    getParksWithTag: (state) => {
+      const route = useRoute()
+
+      return state.parks.filter((park) => park.tags.includes(route.params.tag))
+    },
   },
 })

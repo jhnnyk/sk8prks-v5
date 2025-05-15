@@ -78,6 +78,14 @@ const router = createRouter({
       },
     },
     {
+      path: '/skateparks/tagged/:tag',
+      name: 'skatepark tags',
+      component: () => import('@/views/TagView.vue'),
+      meta: {
+        title: (route) => `${route.params.tag} skateparks | sk8prks.com`,
+      },
+    },
+    {
       path: '/login',
       name: 'login',
       component: () => import('@/views/admin/LoginView.vue'),
