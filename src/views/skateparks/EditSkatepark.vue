@@ -15,9 +15,11 @@ const month = ref('')
 const day = ref('')
 
 onMounted(() => {
-  year.value = skateparkStore.getCurrentPark.lastUpdated.substring(0, 4)
-  month.value = skateparkStore.getCurrentPark.lastUpdated.substring(4, 6)
-  day.value = skateparkStore.getCurrentPark.lastUpdated.substring(6, 8)
+  if (skateparkStore.getCurrentPark.lastUpdated) {
+    year.value = skateparkStore.getCurrentPark.lastUpdated.substring(0, 4)
+    month.value = skateparkStore.getCurrentPark.lastUpdated.substring(4, 6)
+    day.value = skateparkStore.getCurrentPark.lastUpdated.substring(6, 8)
+  }
 })
 
 onUpdated(() => {
@@ -64,6 +66,7 @@ const updatePark = async () => {
         <div class="control">
           <div class="select">
             <select v-model="year" required>
+              <option value="2024">2024</option>
               <option value="2025">2025</option>
             </select>
           </div>
