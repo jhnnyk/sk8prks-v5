@@ -8,8 +8,7 @@ const userStore = useUserStore()
 
 <template>
   <section class="section has-text-centered">
-    <h1 class="title mb-0">Welcome to sk8prks.com</h1>
-    <p class="mb-5">{{ skateparkStore.getParks.length }} skateparks and counting!</p>
+    <h1 class="is-size-1 mb-2">Welcome to sk8prks.com</h1>
 
     <ul class="grid is-col-min-10">
       <li v-for="park in skateparkStore.getParks" :key="park.id" class="cell has-text-centered">
@@ -20,6 +19,7 @@ const userStore = useUserStore()
       </li>
     </ul>
   </section>
+
   <section v-if="userStore.user" class="section has-text-centered">
     <RouterLink :to="{ name: 'add skatepark' }" class="button is-primary">Add Skatepark</RouterLink>
   </section>
