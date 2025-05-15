@@ -31,5 +31,8 @@ onMounted(() => {
   <div class="container">
     <NavBar />
     <RouterView />
+    <footer class="footer">
+      &copy; 2024 - {{ new Date().getFullYear().toString() }} sk8prks.com. All rights reserved.
+    </footer>
   </div>
 </template>
