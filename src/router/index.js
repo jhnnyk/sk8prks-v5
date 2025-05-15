@@ -2,7 +2,6 @@ import { createRouter, createWebHistory } from 'vue-router'
 import { useUserStore } from '@/stores/UserStore'
 import HomeView from '../views/HomeView.vue'
 import ShowSkatepark from '@/views/skateparks/ShowSkatepark.vue'
-import MapView from '@/views/MapView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -15,9 +14,6 @@ const router = createRouter({
     {
       path: '/about',
       name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
       component: () => import('@/views/AboutView.vue'),
       meta: { title: 'about | sk8prks.com' },
     },
@@ -54,6 +50,11 @@ const router = createRouter({
       meta: {
         title: (route) => `edit ${route.params.slug.replace(/-/g, ' ')} skatepark | sk8prks.com`,
       },
+    },
+    {
+      path: '/skateparks/all',
+      name: 'all skateparks',
+      component: () => import('@/views/AllView.vue'),
     },
     {
       path: '/map',

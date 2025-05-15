@@ -26,6 +26,9 @@ const showMobileNav = ref(false)
 
     <div class="navbar-menu" :class="{ 'is-active': showMobileNav }">
       <RouterLink class="navbar-item" @click="showMobileNav = false" to="/">Home</RouterLink>
+      <RouterLink class="navbar-item" @click="showMobileNav = false" to="/skateparks/all">
+        All Skateparks
+      </RouterLink>
       <RouterLink class="navbar-item" @click="showMobileNav = false" to="/cities">
         Skateparks by City
       </RouterLink>

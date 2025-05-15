@@ -7,6 +7,7 @@ const userStore = useUserStore()
 </script>
 <template>
   <section class="section has-text-centered">
+    <h1 class="is-size-1 mb-2">All Skateparks</h1>
     <ul class="grid is-col-min-10">
       <li v-for="park in skateparkStore.getParks" :key="park.id" class="cell has-text-centered">
         <RouterLink :to="`/skateparks/${park.state.slice(3)}/${park.slug}`">
