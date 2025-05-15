@@ -55,6 +55,7 @@ const router = createRouter({
       path: '/skateparks/all',
       name: 'all skateparks',
       component: () => import('@/views/AllView.vue'),
+      meta: { title: 'all skateparks | sk8prks.com' },
     },
     {
       path: '/map',
