@@ -62,7 +62,7 @@ const months = [
     </p>
 
     <p v-if="skateparkStore.getCurrentPark.size" class="is-size-6 is-italic">
-      Size: {{ skateparkStore.getCurrentPark.size }} sq ft.
+      Size: {{ skateparkStore.getCurrentPark.size.toLocaleString() }} sqft.
     </p>
 
     <p class="my-4">{{ skateparkStore.getCurrentPark.description }}</p>
