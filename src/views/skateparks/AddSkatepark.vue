@@ -21,6 +21,7 @@ const state = ref('')
 const zip = ref('')
 const latitude = ref('')
 const longitude = ref('')
+const size = ref(0)
 const description = ref('')
 const tags = ref([])
 const images = ref([])
@@ -39,6 +40,7 @@ const addPark = async () => {
       zip: zip.value,
       latitude: latitude.value,
       longitude: longitude.value,
+      size: size.value,
       description: description.value,
       tags: tags.value,
       images: images.value,
@@ -56,6 +58,7 @@ const addPark = async () => {
     zip.value = ''
     latitude.value = ''
     longitude.value = ''
+    size.value = ''
     description.value = ''
     tags.value = []
     images.value = []
@@ -235,6 +238,13 @@ const deleteImg = (imgToDelete) => {
         <label class="label">Longitude</label>
         <div class="control">
           <input v-model="longitude" class="input" type="text" placeholder="e.g. -104.9358" />
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="label">Size (sqft)</label>
+        <div class="control">
+          <input v-model="size" class="input" type="number" placeholder="25000" />
         </div>
       </div>
 

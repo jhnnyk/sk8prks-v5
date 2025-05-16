@@ -37,13 +37,7 @@ const months = [
       </RouterLink>
     </h1>
 
-    <p v-if="skateparkStore.getCurrentPark.lastUpdated" class="is-size-6 is-italic mb-4">
-      Last updated: {{ months[skateparkStore.getCurrentPark.lastUpdated.substring(4, 6) - 1] }}
-      {{ skateparkStore.getCurrentPark.lastUpdated.substring(6, 8) }},
-      {{ skateparkStore.getCurrentPark.lastUpdated.substring(0, 4) }}
-    </p>
-
-    <p>
+    <p class="mb-4">
       {{ skateparkStore.getCurrentPark.street }}<br />
       {{ skateparkStore.getCurrentPark.city }},
       {{ skateparkStore.getCurrentPark.state.substring(0, 2) }}
@@ -60,7 +54,19 @@ const months = [
         >Apple Maps</a
       >
     </p>
+
+    <p v-if="skateparkStore.getCurrentPark.lastUpdated" class="is-size-6 is-italic">
+      Last updated: {{ months[skateparkStore.getCurrentPark.lastUpdated.substring(4, 6) - 1] }}
+      {{ skateparkStore.getCurrentPark.lastUpdated.substring(6, 8) }},
+      {{ skateparkStore.getCurrentPark.lastUpdated.substring(0, 4) }}
+    </p>
+
+    <p v-if="skateparkStore.getCurrentPark.size" class="is-size-6 is-italic">
+      Size: {{ skateparkStore.getCurrentPark.size }} sq ft.
+    </p>
+
     <p class="my-4">{{ skateparkStore.getCurrentPark.description }}</p>
+
     <div v-for="img in skateparkStore.getCurrentPark.images">
       <img :src="img.path" :alt="img.alt_text" />
     </div>

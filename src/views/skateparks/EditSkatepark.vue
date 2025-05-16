@@ -38,6 +38,7 @@ const updatePark = async () => {
     zip: skateparkStore.getCurrentPark.zip,
     latitude: skateparkStore.getCurrentPark.latitude,
     longitude: skateparkStore.getCurrentPark.longitude,
+    size: skateparkStore.getCurrentPark.size,
     description: skateparkStore.getCurrentPark.description,
     tags: skateparkStore.getCurrentPark.tags,
     images: skateparkStore.getCurrentPark.images,
@@ -219,6 +220,18 @@ const updatePark = async () => {
             class="input"
             type="text"
             placeholder="e.g. -104.9358"
+          />
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="label">Size (sqft)</label>
+        <div class="control">
+          <input
+            v-model="skateparkStore.getCurrentPark.size"
+            class="input"
+            type="number"
+            placeholder="25000"
           />
         </div>
       </div>
