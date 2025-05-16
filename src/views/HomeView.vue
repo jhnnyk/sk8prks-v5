@@ -21,7 +21,7 @@ const months = [
 
 <template>
   <section class="section has-text-centered">
-    <h2 class="is-size-4 is-uppercase has-text-left">Recent Updates</h2>
+    <h2 class="is-size-4 is-uppercase has-text-left">Recently Updated</h2>
 
     <ul class="grid is-col-min-10 is-row-gap-3">
       <li v-for="park in skateparkStore.getRecentlyUpdatedParks" :key="park.id" class="cell">
@@ -43,7 +43,8 @@ const months = [
     <p class="is-size-3 is-uppercase">
       <RouterLink to="/skateparks/all">all skateparks</RouterLink><br />
       <RouterLink to="/skateparks/tagged/lights">skateparks with lights</RouterLink><br />
-      <RouterLink to="/skateparks/tagged/prefab">prefab skateparks</RouterLink>
+      <RouterLink to="/skateparks/tagged/prefab">prefab skateparks</RouterLink><br />
+      <RouterLink to="/skateparks/tagged/indoor">indoor skateparks</RouterLink>
     </p>
   </section>
 </template>
