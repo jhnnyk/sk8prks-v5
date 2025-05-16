@@ -44,7 +44,8 @@ const months = [
       <RouterLink to="/skateparks/all">all skateparks</RouterLink><br />
       <RouterLink to="/skateparks/tagged/lights">skateparks with lights</RouterLink><br />
       <RouterLink to="/skateparks/tagged/prefab">prefab skateparks</RouterLink><br />
-      <RouterLink to="/skateparks/tagged/indoor">indoor skateparks</RouterLink>
+      <RouterLink to="/skateparks/tagged/indoor">indoor skateparks</RouterLink><br />
+      <RouterLink to="/skateparks/tagged/DIY">DIY skateparks</RouterLink>
     </p>
   </section>
 </template>
