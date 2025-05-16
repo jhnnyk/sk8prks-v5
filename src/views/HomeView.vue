@@ -21,9 +21,7 @@ const months = [
 
 <template>
   <section class="section has-text-centered">
-    <h1 class="is-size-1 mb-2">Welcome to sk8prks.com</h1>
-
-    <h2 class="is-size-3 is-uppercase has-text-left">Recently Added / Updated</h2>
+    <h2 class="is-size-4 is-uppercase has-text-left">Recent Updates</h2>
 
     <ul class="grid is-col-min-10 is-row-gap-3">
       <li v-for="park in skateparkStore.getRecentlyUpdatedParks" :key="park.id" class="cell">
