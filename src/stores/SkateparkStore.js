@@ -42,7 +42,9 @@ export const useSkateparkStore = defineStore('SkateparkStore', {
       const cityCounts = []
 
       state.parks.forEach((park) => {
-        if (cityCounts.some((p) => p.name === park.city)) {
+        if (
+          cityCounts.some((p) => p.name === park.city && p.state === park.state.substring(0, 2))
+        ) {
           var index = cityCounts.findIndex((item) => item.name === park.city)
           cityCounts[index].count++
         } else {
@@ -62,7 +64,9 @@ export const useSkateparkStore = defineStore('SkateparkStore', {
       const route = useRoute()
 
       return state.parks.filter(
-        (park) => park.city.toLowerCase().replace(/\s/g, '-') === route.params.citySlug,
+        (park) =>
+          park.city.toLowerCase().replace(/\s/g, '-') === route.params.citySlug &&
+          park.state.slice(3) === route.params.stateSlug,
       )
     },
 
