@@ -11,7 +11,10 @@ const route = useRoute()
     <p class="has-text-centered">loading...</p>
   </section>
   <section v-if="!skateparkStore.loading" class="section has-text-centered">
-    <h2 class="is-size-3 is-uppercase has-text-left">Tagged: {{ route.params.tag }}</h2>
+    <h2 v-if="route.params.tag === 'lights'" class="is-size-3 is-uppercase has-text-left">
+      Skateparks with {{ route.params.tag }}
+    </h2>
+    <h2 v-else class="is-size-3 is-uppercase has-text-left">{{ route.params.tag }} Skateparks</h2>
 
     <ul class="grid is-col-min-10 is-row-gap-3">
       <li v-for="park in skateparkStore.getParksWithTag" :key="park.id" class="cell">
