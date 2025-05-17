@@ -49,7 +49,6 @@ const calculateDistance = (
     Math.cos((parkLat - userLat) * p) / 2 +
     (Math.cos(userLat * p) * Math.cos(parkLat * p) * (1 - Math.cos((parkLong - userLong) * p))) / 2
 
-  // distanceToSkatepark.value = 2 * r * Math.asin(Math.sqrt(a))
   return 2 * r * Math.asin(Math.sqrt(a))
 }
 
@@ -58,8 +57,6 @@ onMounted(async () => {
 })
 
 watch([userLat, userLong], ([newLat, newLong], [oldLat, oldLong]) => {
-  // calculateDistance(newLat, newLong)
-
   const withDistance = skateparkStore.getParks.map((park) => {
     return {
       ...park,
@@ -72,18 +69,18 @@ watch([userLat, userLong], ([newLat, newLong], [oldLat, oldLong]) => {
     if (a.distanceAway > b.distanceAway) return 1
   })
 
-  skateparksWithDistanceAway.value = withDistance.slice(0, 10)
+  skateparksWithDistanceAway.value = withDistance.slice(0, 20)
 })
 </script>
 
 <template>
   <section class="section">
-    <h1>Geolocation Example</h1>
+    <h1 class="is-size-1 has-text-centered">Closest Skateparks</h1>
     <!-- Display error message if any -->
     <p v-if="errorMessage">{{ errorMessage }}</p>
 
     <!-- Show latitude and longitude when successfully fetched -->
-    <p v-if="userLat && userLong">Latitude: {{ userLat }}, Longitude: {{ userLong }}</p>
+    <!-- <p v-if="userLat && userLong">Latitude: {{ userLat }}, Longitude: {{ userLong }}</p> -->
 
     <!-- Show loading message while waiting for geolocation -->
     <p v-if="isLoading">Loading location...</p>
@@ -95,7 +92,7 @@ watch([userLat, userLong], ([newLat, newLong], [oldLat, oldLong]) => {
         <RouterLink :to="`/skateparks/${park.state.slice(3)}/${park.slug}`">
           <img :src="park.images[1].path" :alt="park.images[1].alt_text" />
           {{ park.title }}<br />
-          {{ park.distanceAway }}
+          {{ park.distanceAway.toFixed(1) }} miles away
         </RouterLink>
       </li>
     </ul>
