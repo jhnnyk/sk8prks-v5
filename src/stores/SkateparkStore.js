@@ -70,13 +70,11 @@ export const useSkateparkStore = defineStore('SkateparkStore', {
       )
     },
 
-    getRecentlyUpdatedParks: (state) => {
-      const sorted = state.parks.slice().sort((a, b) => {
+    getParksSortedByLastUpdated: (state) => {
+      return state.parks.slice().sort((a, b) => {
         if (a.lastUpdated < b.lastUpdated) return 1
         if (a.lastUpdated > b.lastUpdated) return -1
       })
-
-      return sorted.slice(0, 10)
     },
 
     getParksWithTag: (state) => {

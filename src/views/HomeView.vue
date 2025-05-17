@@ -1,5 +1,6 @@
 <script setup>
 import { useSkateparkStore } from '@/stores/SkateparkStore'
+import { computed } from 'vue'
 
 const skateparkStore = useSkateparkStore()
 
@@ -17,6 +18,10 @@ const months = [
   'November',
   'December',
 ]
+
+const recentlyUpdated = computed(() => {
+  return skateparkStore.getParksSortedByLastUpdated.slice(0, 5)
+})
 </script>
 
 <template>
@@ -24,7 +29,7 @@ const months = [
     <h2 class="is-size-4 is-uppercase has-text-left">Recently Updated</h2>
 
     <ul class="grid is-col-min-10 is-row-gap-3">
-      <li v-for="park in skateparkStore.getRecentlyUpdatedParks" :key="park.id" class="cell">
+      <li v-for="park in recentlyUpdated" :key="park.id" class="cell">
         <RouterLink :to="`/skateparks/${park.state.slice(3)}/${park.slug}`">
           <img :src="park.images[1].path" :alt="park.images[1].alt_text" />
 
