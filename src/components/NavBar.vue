@@ -29,6 +29,9 @@ const showMobileNav = ref(false)
       <RouterLink class="navbar-item" @click="showMobileNav = false" to="/skateparks/all">
         All Skateparks
       </RouterLink>
+      <RouterLink class="navbar-item" @click="showMobileNav = false" to="/skateparks/closest">
+        Closest Skateparks
+      </RouterLink>
       <RouterLink class="navbar-item" @click="showMobileNav = false" to="/cities">
         Skateparks by City
       </RouterLink>
