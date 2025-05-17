@@ -86,6 +86,14 @@ const router = createRouter({
       },
     },
     {
+      path: '/skateparks/closest',
+      name: 'closest skateparks',
+      component: () => import('@/views/GeolocationView.vue'),
+      meta: {
+        title: 'closest skateparks to me | sk8prks.com',
+      },
+    },
+    {
       path: '/login',
       name: 'login',
       component: () => import('@/views/admin/LoginView.vue'),
