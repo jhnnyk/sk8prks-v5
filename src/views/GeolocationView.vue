@@ -74,8 +74,8 @@ watch([userLat, userLong], ([newLat, newLong], [oldLat, oldLong]) => {
 </script>
 
 <template>
-  <section class="section">
-    <h1 class="is-size-1 has-text-centered">Closest Skateparks</h1>
+  <section class="section has-text-centered">
+    <h1 class="is-size-1 mb-2">Closest Skateparks</h1>
     <!-- Display error message if any -->
     <p v-if="errorMessage">{{ errorMessage }}</p>
 
