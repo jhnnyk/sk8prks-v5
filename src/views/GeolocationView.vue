@@ -1,11 +1,15 @@
 <script setup>
 import { onMounted, ref, watch } from 'vue'
+import { useSkateparkStore } from '@/stores/SkateparkStore'
+
+const skateparkStore = useSkateparkStore()
 
 const userLat = ref(null)
 const userLong = ref(null)
 const errorMessage = ref(null)
 const isLoading = ref(false)
 const distanceToSkatepark = ref(0)
+const skateparksWithDistanceAway = ref([])
 
 const getGeolocation = () => {
   if ('geolocation' in navigator) {
@@ -31,7 +35,7 @@ const getGeolocation = () => {
   }
 }
 
-const distance = (
+const calculateDistance = (
   userLat,
   userLong,
   parkLat = 30.454659165386186,
@@ -45,7 +49,8 @@ const distance = (
     Math.cos((parkLat - userLat) * p) / 2 +
     (Math.cos(userLat * p) * Math.cos(parkLat * p) * (1 - Math.cos((parkLong - userLong) * p))) / 2
 
-  distanceToSkatepark.value = 2 * r * Math.asin(Math.sqrt(a))
+  // distanceToSkatepark.value = 2 * r * Math.asin(Math.sqrt(a))
+  return 2 * r * Math.asin(Math.sqrt(a))
 }
 
 onMounted(async () => {
@@ -53,20 +58,46 @@ onMounted(async () => {
 })
 
 watch([userLat, userLong], ([newLat, newLong], [oldLat, oldLong]) => {
-  distance(newLat, newLong)
+  // calculateDistance(newLat, newLong)
+
+  const withDistance = skateparkStore.getParks.map((park) => {
+    return {
+      ...park,
+      distanceAway: calculateDistance(newLat, newLong, park.latitude, park.longitude),
+    }
+  })
+
+  withDistance.sort((a, b) => {
+    if (a.distanceAway < b.distanceAway) return -1
+    if (a.distanceAway > b.distanceAway) return 1
+  })
+
+  skateparksWithDistanceAway.value = withDistance.slice(0, 10)
 })
 </script>
 
 <template>
-  <h1>Geolocation Example</h1>
-  <!-- Display error message if any -->
-  <p v-if="errorMessage">{{ errorMessage }}</p>
+  <section class="section">
+    <h1>Geolocation Example</h1>
+    <!-- Display error message if any -->
+    <p v-if="errorMessage">{{ errorMessage }}</p>
 
-  <!-- Show latitude and longitude when successfully fetched -->
-  <p v-if="userLat && userLong">Latitude: {{ userLat }}, Longitude: {{ userLong }}</p>
+    <!-- Show latitude and longitude when successfully fetched -->
+    <p v-if="userLat && userLong">Latitude: {{ userLat }}, Longitude: {{ userLong }}</p>
 
-  <!-- Show loading message while waiting for geolocation -->
-  <p v-if="isLoading">Loading location...</p>
+    <!-- Show loading message while waiting for geolocation -->
+    <p v-if="isLoading">Loading location...</p>
 
-  <p v-if="distanceToSkatepark">{{ distanceToSkatepark }}</p>
+    <p v-if="distanceToSkatepark">{{ distanceToSkatepark }}</p>
+
+    <ul class="grid is-col-min-10">
+      <li v-for="park in skateparksWithDistanceAway" :key="park.id" class="cell has-text-centered">
+        <RouterLink :to="`/skateparks/${park.state.slice(3)}/${park.slug}`">
+          <img :src="park.images[1].path" :alt="park.images[1].alt_text" />
+          {{ park.title }}<br />
+          {{ park.distanceAway }}
+        </RouterLink>
+      </li>
+    </ul>
+  </section>
 </template>
