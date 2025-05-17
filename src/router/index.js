@@ -92,6 +92,9 @@ const router = createRouter({
       meta: { title: 'login | sk8prks.com' },
     },
   ],
+  scrollBehavior() {
+    return { top: 0, left: 0 }
+  },
 })
 
 router.afterEach((to) => {
