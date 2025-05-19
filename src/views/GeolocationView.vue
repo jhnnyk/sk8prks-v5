@@ -81,7 +81,7 @@ watch([userLat, userLong], ([newLat, newLong], [oldLat, oldLong]) => {
     <!-- Show loading message while waiting for geolocation -->
     <p v-if="isLoading">Loading location...</p>
 
-    <p v-if="!skateparksWithDistanceAway.length">Loading parks...(2)</p>
+    <p v-if="!skateparksWithDistanceAway.length">Loading parks...</p>
     <ul v-if="skateparksWithDistanceAway.length" class="grid is-col-min-10">
       <li v-for="park in skateparksWithDistanceAway" :key="park.id" class="cell has-text-centered">
         <RouterLink :to="`/skateparks/${park.state.slice(3)}/${park.slug}`">
