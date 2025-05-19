@@ -55,7 +55,7 @@ onMounted(async () => {
   getGeolocation()
 })
 
-watch([userLat, userLong], ([newLat, newLong], [oldLat, oldLong]) => {
+watch([userLat, userLong, () => skateparkStore.parks], ([newLat, newLong], [oldLat, oldLong]) => {
   const withDistance = skateparkStore.getParks.map((park) => {
     return {
       ...park,
