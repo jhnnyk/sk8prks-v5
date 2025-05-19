@@ -8,7 +8,6 @@ const userLat = ref(null)
 const userLong = ref(null)
 const errorMessage = ref(null)
 const isLoading = ref(false)
-const distanceToSkatepark = ref(0)
 const skateparksWithDistanceAway = ref([])
 
 const getGeolocation = () => {
@@ -79,15 +78,11 @@ watch([userLat, userLong], ([newLat, newLong], [oldLat, oldLong]) => {
     <!-- Display error message if any -->
     <p v-if="errorMessage">{{ errorMessage }}</p>
 
-    <!-- Show latitude and longitude when successfully fetched -->
-    <!-- <p v-if="userLat && userLong">Latitude: {{ userLat }}, Longitude: {{ userLong }}</p> -->
-
     <!-- Show loading message while waiting for geolocation -->
     <p v-if="isLoading">Loading location...</p>
 
-    <p v-if="distanceToSkatepark">{{ distanceToSkatepark }}</p>
-
-    <ul class="grid is-col-min-10">
+    <p v-if="!skateparksWithDistanceAway.length">Loading parks...(2)</p>
+    <ul v-if="skateparksWithDistanceAway.length" class="grid is-col-min-10">
       <li v-for="park in skateparksWithDistanceAway" :key="park.id" class="cell has-text-centered">
         <RouterLink :to="`/skateparks/${park.state.slice(3)}/${park.slug}`">
           <img :src="park.images[1].path" :alt="park.images[1].alt_text" />
