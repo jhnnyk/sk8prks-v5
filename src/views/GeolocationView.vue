@@ -75,9 +75,50 @@ watch([userLat, userLong, () => skateparkStore.parks], ([newLat, newLong], [oldL
 <template>
   <section class="section has-text-centered">
     <h1 class="is-size-1 mb-2">Closest Skateparks</h1>
+
     <!-- Display error message if any -->
-    <div v-if="errorMessage" class="notification is-danger is-light">
-      {{ errorMessage }}
+    <div v-if="errorMessage">
+      <div class="notification is-danger is-light">
+        <p class="is-italic">{{ errorMessage }}</p>
+        <p class="has-text-weight-bold">Please enable Location Services on your device</p>
+      </div>
+
+      <article class="message is-info has-text-left">
+        <div class="message-header">on iPhone:</div>
+        <div class="message-body content">
+          <ul>
+            <li>Open the Settings app on your iPhone</li>
+            <li>Scroll down and tap on "Privacy &amp; Security"</li>
+            <li>Tap on "Location Services"</li>
+            <li>
+              Make sure the "Location Services" switch is toggled to the "on" position (green).
+            </li>
+            <li>
+              Scroll through the list of apps and find the one you want to allow access to your
+              location (probably Safari).
+            </li>
+            <li>Tap on the app's name.</li>
+            <li>Choose one of the location access options</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="message is-info has-text-left mb-5">
+        <div class="message-header">on Android:</div>
+        <div class="message-body content">
+          <ul>
+            <li>Open your Android phone's Settings app</li>
+            <li>
+              Look for Location or Security & location (depending on your device's Android version)
+              and tap it
+            </li>
+            <li>Ensure the master location switch is turned on</li>
+            <li>From the Location settings, look for App permissions or App-level permissions</li>
+            <li>Select the specific app you want to manage</li>
+            <li>Choose the desired location access option</li>
+          </ul>
+        </div>
+      </article>
     </div>
 
     <!-- Show loading message while waiting for geolocation -->
@@ -86,7 +127,7 @@ watch([userLat, userLong, () => skateparkStore.parks], ([newLat, newLong], [oldL
     <div v-if="!skateparksWithDistanceAway.length" class="notification is-info is-light">
       Loading closest skateparks...
     </div>
-    <ul v-if="skateparksWithDistanceAway.length" class="grid is-col-min-10">
+    <ul v-if="userLat && userLong" class="grid is-col-min-10">
       <li v-for="park in skateparksWithDistanceAway" :key="park.id" class="cell has-text-centered">
         <RouterLink :to="`/skateparks/${park.state.slice(3)}/${park.slug}`">
           <img :src="park.images[1].path" :alt="park.images[1].alt_text" />
