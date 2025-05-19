@@ -76,12 +76,16 @@ watch([userLat, userLong, () => skateparkStore.parks], ([newLat, newLong], [oldL
   <section class="section has-text-centered">
     <h1 class="is-size-1 mb-2">Closest Skateparks</h1>
     <!-- Display error message if any -->
-    <p v-if="errorMessage">{{ errorMessage }}</p>
+    <div v-if="errorMessage" class="notification is-danger is-light">
+      {{ errorMessage }}
+    </div>
 
     <!-- Show loading message while waiting for geolocation -->
-    <p v-if="isLoading">Loading location...</p>
+    <div v-if="isLoading" class="notification is-primary is-light">Finding location...</div>
 
-    <p v-if="!skateparksWithDistanceAway.length">Loading parks...</p>
+    <div v-if="!skateparksWithDistanceAway.length" class="notification is-info is-light">
+      Loading closest skateparks...
+    </div>
     <ul v-if="skateparksWithDistanceAway.length" class="grid is-col-min-10">
       <li v-for="park in skateparksWithDistanceAway" :key="park.id" class="cell has-text-centered">
         <RouterLink :to="`/skateparks/${park.state.slice(3)}/${park.slug}`">
