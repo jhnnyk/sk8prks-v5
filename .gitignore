@@ -31,3 +31,4 @@ coverage
 
 #Firebase
 /src/firebase
+.firebase/hosting.ZGlzdA.cache
