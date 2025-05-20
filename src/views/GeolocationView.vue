@@ -127,7 +127,7 @@ watch([userLat, userLong, () => skateparkStore.parks], ([newLat, newLong], [oldL
     <div v-if="!skateparksWithDistanceAway.length" class="notification is-info is-light">
       Loading closest skateparks...
     </div>
-    <ul v-if="userLat && userLong" class="grid is-col-min-10">
+    <ul v-if="skateparksWithDistanceAway.length" class="grid is-col-min-10">
       <li v-for="park in skateparksWithDistanceAway" :key="park.id" class="cell has-text-centered">
         <RouterLink :to="`/skateparks/${park.state.slice(3)}/${park.slug}`">
           <img :src="park.images[1].path" :alt="park.images[1].alt_text" />
