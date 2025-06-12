@@ -183,6 +183,7 @@ const updatePark = async () => {
               <option value="CA:california">California</option>
               <option value="CO:colorado">Colorado</option>
               <option value="TX:texas">Texas</option>
+              <option value="UT:utah">Utah</option>
             </select>
           </div>
         </div>
