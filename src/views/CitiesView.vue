@@ -8,6 +8,10 @@ const coloradoCities = computed(() => {
   return skateparkStore.getParkCountByCity.filter((city) => city.state === 'CO')
 })
 
+const nevadaCities = computed(() => {
+  return skateparkStore.getParkCountByCity.filter((city) => city.state === 'NV')
+})
+
 const texasCities = computed(() => {
   return skateparkStore.getParkCountByCity.filter((city) => city.state === 'TX')
 })
@@ -24,6 +28,15 @@ const utahCities = computed(() => {
     <ul class="grid is-col-min-10">
       <li v-for="city in coloradoCities" :key="city.name">
         <RouterLink :to="`/city/colorado/${city.name.toLowerCase().replace(/\s/g, '-')}`">
+          {{ city.name }} ({{ city.count }})
+        </RouterLink>
+      </li>
+    </ul>
+
+    <h2 class="is-size-3 is-uppercase">Nevada</h2>
+    <ul class="grid is-col-min-10">
+      <li v-for="city in nevadaCities" :key="city.name">
+        <RouterLink :to="`/city/nevada/${city.name.toLowerCase().replace(/\s/g, '-')}`">
           {{ city.name }} ({{ city.count }})
         </RouterLink>
       </li>
