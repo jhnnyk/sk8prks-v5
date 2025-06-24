@@ -182,6 +182,7 @@ const updatePark = async () => {
             <select v-model="skateparkStore.getCurrentPark.state">
               <option value="CA:california">California</option>
               <option value="CO:colorado">Colorado</option>
+              <option value="IA:iowa">Iowa</option>
               <option value="NV:nevada">Nevada</option>
               <option value="TX:texas">Texas</option>
               <option value="UT:utah">Utah</option>
