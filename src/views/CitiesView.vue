@@ -80,7 +80,7 @@ const wisconsinCities = computed(() => {
     <h2 class="is-size-3 is-uppercase">Wisconsin</h2>
     <ul class="grid is-col-min-10">
       <li v-for="city in wisconsinCities" :key="city.name">
-        <RouterLink :to="`/city/utah/${city.name.toLowerCase().replace(/\s/g, '-')}`">
+        <RouterLink :to="`/city/wisconsin/${city.name.toLowerCase().replace(/\s/g, '-')}`">
           {{ city.name }} ({{ city.count }})
         </RouterLink>
       </li>
